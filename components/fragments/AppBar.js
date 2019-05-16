@@ -4,21 +4,23 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import classNames from 'classnames';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
 
-const TopBar = (props) => {
+const TopBar = ({classes, state, handleDrawerOpen, handleDrawerClose}) => {
         return(
             <AppBar
           position="absolute"
-          className={classNames(props.classes.appBar, props.state.open && props.classes.appBarShift)}
+          className={classNames(classes.appBar, state.open && classes.appBarShift)}
         >
-          <Toolbar disableGutters={!props.state.open} className={props.classes.toolbar}>
+          <Toolbar disableGutters={!state.open} className={classes.toolbar}>
             <IconButton
               color="inherit"
               aria-label="Open drawer"
-              //onClick={this.handleDrawerOpen}
+              onClick={handleDrawerOpen}
               className={classNames(
                 classes.menuButton,
-                this.state.open && classes.menuButtonHidden,
+                state.open && classes.menuButtonHidden,
               )}
             >
               <MenuIcon />

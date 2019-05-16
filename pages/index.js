@@ -17,6 +17,7 @@ import { mainListItems, secondaryListItems } from '../components/listItems';
 import SimpleTable from '../components/SimpleTable';
 
 import TopBar from '../components/fragments/AppBar';
+import { AppBar } from '@material-ui/core';
 
 const drawerWidth = 240;
 
@@ -112,11 +113,17 @@ class Dashboard extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    const values = {
+      classes: this.props.classes,
+      state: this.state,
+      handleDrawerOpen: this.handleDrawerOpen,
+      handleDrawerClose: this.handleDrawerClose
+    }
     return (
       <div className={classes.root}>
         <CssBaseline />
         
+        <TopBar {...values}></TopBar>
 
         <Drawer
           variant="permanent"
