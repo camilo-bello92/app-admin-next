@@ -1,23 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
-
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-
-import { mainListItems, secondaryListItems } from '../components/listItems';
 //import SimpleLineChart from '../components/SimpleLineChart';
 import SimpleTable from '../components/SimpleTable';
 
 import TopBar from '../components/fragments/AppBar';
-import { AppBar } from '@material-ui/core';
+import Sidebar from '../components/fragments/Sidebar';
+import { withRouter } from 'next/router';
 
 const drawerWidth = 240;
 
@@ -113,35 +104,18 @@ class Dashboard extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const values = {
+    const propsChildren = {
       classes: this.props.classes,
       state: this.state,
       handleDrawerOpen: this.handleDrawerOpen,
       handleDrawerClose: this.handleDrawerClose
     }
+
     return (
       <div className={classes.root}>
-        <CssBaseline />
-        
-        <TopBar {...values}></TopBar>
-
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
-          }}
-          open={this.state.open}
-        >
-          <div className={classes.toolbarIcon}>
-            <IconButton onClick={this.handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <List>{mainListItems}</List>
-          <Divider />
-          <List>{secondaryListItems}</List>
-        </Drawer>
+        <CssBaseline />   
+        <TopBar {...propsChildren}></TopBar>
+        <Sidebar {...propsChildren}></Sidebar>     
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <Typography variant="h4" gutterBottom component="h2">
@@ -161,16 +135,3 @@ Dashboard.propTypes = {
 };
 
 export default withStyles(styles)(Dashboard);
-
-
-/*import Dashboard from '../components/Dashboard';
-
-export default class Index extends React.Component {
-  render() {
-    return (
-      <div>
-        <Dashboard></Dashboard>
-      </div>
-    );
-  }
-}*/
